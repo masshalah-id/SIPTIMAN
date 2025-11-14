@@ -39,7 +39,7 @@ document.getElementById("app").innerHTML = `
         <input id="fInstansi" class="border p-2 w-full mb-3" />
 
         <label>Hari/Tanggal Acara</label>
-        <input id="fHari" class="border p-2 w-full mb-3" />
+        <input type="date" id="fHari" class="border p-2 w-full mb-3" />
 
         <label>Waktu</label>
         <input id="fWaktu" class="border p-2 w-full mb-3" />
@@ -228,6 +228,43 @@ function setTanggal() {
     "Batam, " + t.toLocaleDateString("id-ID", ops);
 }
 setTanggal();
+/* ----------------- FORMAT HARI + TANGGAL OTOMATIS ----------------- */
+const inputHari = document.getElementById("fHari");
+
+inputHari.addEventListener("change", function () {
+    const value = this.value;
+    if (!value) return;
+
+    const tgl = new Date(value);
+
+    const namaHari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+    const namaBulan = [
+        'Januari','Februari','Maret','April','Mei','Juni',
+        'Juli','Agustus','September','Oktober','November','Desember'
+    ];
+
+    const hari = namaHari[tgl.getDay()];
+    const tanggal = tgl.getDate();
+    const bulan = namaBulan[tgl.getMonth()];
+    const tahun = tgl.getFullYear();
+
+    const hasil = `${hari}, ${tanggal} ${bulan} ${tahun}`;
+
+    // ubah input menjadi text setelah dipilih
+    this.type = "text";
+    this.value = hasil;
+
+    updatePreview();
+});
+
+// Jika ingin pilih ulang, klik → kembali jadi date picker
+inputHari.addEventListener("focus", function () {
+    if (this.type === "text") {
+        this.type = "date";
+        this.value = "";
+    }
+});
+
 
 /* ----------------- LOGO HANDLER ----------------- */
 function renderLogo() {
@@ -469,5 +506,6 @@ document.getElementById("btnReset").addEventListener("click", () => {
 
 /* ----------------- INIT ----------------- */
 updatePreview();
+
 
 
