@@ -163,33 +163,30 @@ document.getElementById("app").innerHTML = `
 /* ----------------- TEMPLATES ----------------- */
 const templates = {
   undangan: {
-    label: "Undangan - Pengukuhan",
-    perihal: "Undangan Acara Pengukuhan dan Syukuran",
-    tujuan: "Bapak Camat Sagulung",
-    instansi: "Kecamatan Sagulung",
-    hari: "Sabtu, 11 Oktober 2025",
-    waktu: "Pukul 19.30 WIB",
+    label: "Undangan - Rapat Warga RT 001",
+    perihal: "Undangan Rapat Warga",
+   prefix : "UND",
+    tujuan: "Warga RT 001 Perum. Tiara Mantang",
+    instansi: "",
+    hari: "hari, Tanggal ",
+    waktu: "Pukul 00.00 WIB",
     tempat: "Gang Blok B–C, Perumahan Tiara Mantang",
-    isi: "<p>Dalam rangka pengukuhan Ketua RT 001 terpilih serta syukuran atas selesainya pengaspalan jalan Blok B–C, kami mengundang Bapak/Ibu untuk hadir.</p>"
+    isi: "<p>Dalam rangka pembahasan ............., kami mengundang Bapak/Ibu untuk hadir.</p>"
   },
   pemberitahuan: {
-    label: "Pemberitahuan Rapat",
-    perihal: "Rapat RT",
+    label: "Pemberitahuan kegiatan",
+    perihal: " Kegitan RT 001",
+     prefix : "PMB",
     tujuan: "Seluruh Warga RT 001",
     instansi: "",
-    hari: "Minggu, 20 Oktober 2025",
-    waktu: "Pukul 10.00 WIB",
-    tempat: "Balai RT",
-    isi: "<p>Dengan ini kami mengundang seluruh warga dalam rapat bulanan RT 001.</p>"
+    hari: "hari, tanggal",
+    waktu: "Pukul 00.00 WIB",
+    tempat: "Fasum RT 001",
+    isi: "<p>Dengan ini kami mengundang seluruh warga dalam kegiatan..... yang diadakan RT 001.</p>"
   },
   domisili: {
     label: "Surat Keterangan Domisili",
     perihal: "Surat Keterangan Domisili",
-    tujuan: "",
-    instansi: "",
-    hari: "-",
-    waktu: "-",
-    tempat: "-",
     isi: "<p>Yang bertanda tangan di bawah ini menerangkan bahwa:<br>Nama: ...<br>Alamat: ...<br>Benar berdomisili di RT 001 RW 005 Perumahan Tiara Mantang.</p>"
   }
 };
@@ -258,10 +255,16 @@ function genNomor() {
   let c = parseInt(localStorage.getItem("rt_nomor_counter") || "0");
   c++;
   localStorage.setItem("rt_nomor_counter", c);
+
   const d = new Date();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const yyyy = d.getFullYear();
-  const nomor = `UND/RT001/${mm}/${yyyy}/${String(c).padStart(3, "0")}`;
+
+  const templateKey = document.getElementById("selTemplate").value;
+  const prefix = templates[templateKey].prefix || "XXX";
+
+  // FORMAT BARU: PREFIX/NOMOR/RT001/BULAN/TAHUN
+  const nomor = `${prefix}/${String(c).padStart(3, "0")}/RT001/${mm}/${yyyy}`;
   document.getElementById("fNomor").value = nomor;
   updatePreview();
 }
@@ -466,3 +469,4 @@ document.getElementById("btnReset").addEventListener("click", () => {
 
 /* ----------------- INIT ----------------- */
 updatePreview();
+
