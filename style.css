@@ -1,0 +1,141 @@
+/* style.css - styling dasar untuk aplikasi persuratan RT 001 */
+
+html,body {
+  height: 100%;
+}
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: #f3f4f6;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.max-w-7xl { max-width: 1200px; }
+
+.page {
+  /* width: 210mm;
+  min-height: 297mm;
+  padding: 1mm 10mm 10mm 10mm;
+  background: white;
+  box-sizing: border-box;
+  margin: 0 auto;*/ 
+  width: 210mm;
+  min-height: 297mm;
+  padding: 1mm 10mm 10mm 10mm;
+  /* 10mm top, 20mm right, 20mm bottom, 20mm left */
+  background: white;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.editor { height: 220px; }
+.logo-preview { max-height: 80px; display: block; margin-left:auto; margin-right:auto; }
+
+
+/* ============================
+   PRINT – Hanya cetak #preview
+   ============================ */
+@media print {
+
+  /* Hilangkan area UI */
+  .no-print,
+  #draftList,
+  #formArea,
+  header,
+  nav,
+  button,
+  select,
+  input,
+  textarea,
+  .ql-toolbar,
+  .ql-container {
+    display: none !important;
+  }
+
+  /* SURAT #preview WAJIB TAMPIL */
+  #preview {
+    display: block !important;
+    visibility: visible !important;
+
+    width: 210mm !important;
+    min-height: 297mm !important;
+
+    padding: 20mm !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+
+  /* Semua elemen dalam preview juga wajib tampil */
+  #preview * {
+    display: block !important;
+    visibility: visible !important;
+
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    color: black !important;
+  }
+
+  /* Pastikan warna/border tidak hilang */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hilangkan margin default browser */
+  @page {
+    margin: 0;
+    size: A4;
+  }
+}
+
+
+/* font kop lebih besar */
+#headerArea p:first-child { font-size: 24px; font-weight:700; margin:0; }
+#headerArea p:nth-child(2), #headerArea p:nth-child(3) { font-size: 18px; margin:0; }
+
+/* kecilkan font tabel pada preview agar pas di halaman */
+.page table { font-size: 13px; }
+
+/* draft list styling */
+#draftList .draft-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; margin-bottom: 0.5rem; background:#fff; }
+#draftList .draft-item .meta { font-size: 13px; color: #4b5563; }
+#draftList .draft-item button { margin-left: 0.5rem; }
+
+/* penutup tampilan */
+#pPenutup { white-space: pre-line; }
+
+/* responsive small screens */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr !important; }
+  .page { width: auto; padding: 12px; }
+}
+/* ============================================
+   PARAGRAF MENJOROK (ISI & PENUTUP)
+============================================ */
+#pIsi p,
+#pPenutup,
+#pIsi div {  
+  text-indent: 30px;     /* menjorok ke dalam */
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;       /* samakan ukuran font */
+  line-height: 1.5;
+}
+
+/* tabel: tanggal, waktu, tempat, perihal */
+.page table td {
+  font-size: 16px !important;
+}
+
+/* perihal tambahan juga disamakan */
+#pPerihal2 {
+  font-size: 16px;
+}
+#actionButtons {
+  background: red;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 15px;
+}
