@@ -129,7 +129,7 @@ document.getElementById("app").innerHTML = `
           <div id="pPenutup" class="text-justify mb-6"></div>
 
           <div class="mt-10 w-full text-center">
-            <p class="font-semibold">Hormat kami,</p>
+            <p>Hormat kami,</p>
           </div>
 
           <div class="mt-6 grid grid-cols-2">
@@ -145,7 +145,7 @@ document.getElementById("app").innerHTML = `
           </div>
 
           <div class="mt-10 text-center">
-            <p class="font-semibold">Mengetahui,</p>
+            <p>Mengetahui,</p>
             <p>Ketua RW 05</p><br><br>
             <p class="font-semibold" id="pKetuaRW"></p>
           </div>
@@ -469,4 +469,5 @@ document.getElementById("btnReset").addEventListener("click", () => {
 
 /* ----------------- INIT ----------------- */
 updatePreview();
+
 
